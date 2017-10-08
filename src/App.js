@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {State} from './State';
 
 function launchIntoFullscreen(element) {
   if(element.requestFullscreen) {
@@ -43,15 +44,16 @@ class Textarea extends Component {
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {textContent: ""};
+    this.domainState = new State();
+    this.state = this.domainState.getUIState();
 
     this.handleTextareaKeyUp = this.handleTextareaKeyUp.bind(this);
   }
 
   handleTextareaKeyUp(e) {
     e.preventDefault();
-
-    this.setState( {textContent: e.key} );
+    this.domainState.addText(e.key);
+    this.setState(this.domainState.getUIState());
   }
 
   render() {

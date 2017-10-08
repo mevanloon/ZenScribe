@@ -1,11 +1,11 @@
 export function State() {
   let textContent = "";
 
-  this.getTextContent = function() {
-    return this.textContent;
+  this.getUIState = function() {
+    return {textContent: textContent}
   }
 
   this.addText = function(character) {
-    this.textContent = character;
+    textContent = character;
   }
 }

@@ -18,12 +18,12 @@ it('adds text to the state', () => {
   const state = new State();
   state.addText("a");
 
-  assert.ok(state.textContent === "a");
+  assert.ok(state.getUIState().textContent === "a");
 });
 
 it('adds emoji to the state', () => {
   const state = new State();
   state.addText("😎");
 
-  assert.ok(state.textContent === "😎");
+  assert.ok(state.getUIState().textContent === "😎");
 });
