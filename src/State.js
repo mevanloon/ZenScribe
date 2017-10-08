@@ -1,11 +1,17 @@
 export function State() {
   let textContent = "";
+  let cursorPosition = 0;
 
-  this.getUIState = function() {
-    return {textContent: textContent}
+  let moveCursor = function(n) {
+    cursorPosition += n;
   }
 
-  this.addText = function(character) {
-    textContent += character;
+  this.getUIState = function() {
+    return {textContent: textContent, cursorPosition: cursorPosition}
+  }
+
+  this.addText = function(characters) {
+    textContent += characters;
+    moveCursor(characters.length);
   }
 }

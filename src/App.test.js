@@ -45,10 +45,17 @@ it('adds four spaces', () => {
 
   assert.ok(state.getUIState().textContent === "    ");
 });
-// it('moves the cursor next to the letter input', () => {
-  // assert.ok(window.getSelection)
 
-  // kijk waar de cursor staat
-  // doe keypress
-  // kijk waar de cursor nu staat
-// })
+it('moves the cursor next to the letter input', () => {
+  const state = new State();
+  state.addText("123");
+
+  assert.equal(state.getUIState().cursorPosition, 3);
+})
+
+it('moves the cursor next to the letter input', () => {
+  const state = new State();
+  state.addText("12345");
+
+  assert.equal(state.getUIState().cursorPosition, 5);
+})
