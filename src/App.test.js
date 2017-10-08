@@ -14,11 +14,19 @@ it('can create a state', () => {
   assert.ok(state != null && state != undefined);
 });
 
-it('adds text to the state', () => {
+it('adds character to the state', () => {
   const state = new State();
   state.addText("a");
 
   assert.ok(state.getUIState().textContent === "a");
+});
+
+it('adds multiple chacters to the state', () => {
+  const state = new State();
+  state.addText("a");
+  state.addText("bcdefg");
+
+  assert.ok(state.getUIState().textContent === "abcdefg");
 });
 
 it('adds emoji to the state', () => {

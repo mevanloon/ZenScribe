@@ -6,6 +6,6 @@ export function State() {
   }
 
   this.addText = function(character) {
-    textContent = character;
+    textContent += character;
   }
 }
