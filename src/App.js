@@ -16,12 +16,21 @@ function launchIntoFullscreen(element) {
 }
 
 class Textarea extends Component {
-  doFocus() {
-    this.textarea.focus();
-  }
+  componentDidUpdate() {
+    console.log(123);
+    let node = this.textarea;
 
-  componentDidMount() {
-    this.doFocus();
+    node.focus();
+    const textNode = node.firstChild;
+    const caret = this.props.cursorPosition;
+    console.log(caret);
+    // debugger
+    const range = document.createRange();
+    range.setEnd(textNode, caret);
+    range.setStart(textNode, caret);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
   }
 
   render() {
@@ -32,8 +41,7 @@ class Textarea extends Component {
         tabIndex="0"
         contentEditable="true"
         // onDoubleClick={(e)=>{launchIntoFullscreen(document.getElementById('root'))}}
-        onKeyUp={this.onKeyUp}
-        onKeyPress={this.props.handleTextareaKeyUp}
+        onKeyPress={this.props.handleKeyDown}
         ref={(input) => this.textarea = input}
         suppressContentEditableWarning={true} >
         {this.props.textContent}
@@ -48,10 +56,10 @@ export default class App extends Component {
     this.domainState = new State();
     this.state = this.domainState.getUIState();
 
-    this.handleTextareaKeyUp = this.handleTextareaKeyUp.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  handleTextareaKeyUp(e) {
+  handleKeyDown(e) {
     e.preventDefault();
     this.domainState.addText(e.key);
     this.setState(this.domainState.getUIState());
@@ -60,7 +68,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="app">
-        <Textarea handleTextareaKeyUp={this.handleTextareaKeyUp} textContent={this.state.textContent}/>
+        <Textarea handleKeyDown={this.handleKeyDown} handleKeyUp={this.handleKeyUp} textContent={this.state.textContent} cursorPosition={this.domainState.getUIState().cursorPosition}/>
       </div>
     );
   }
