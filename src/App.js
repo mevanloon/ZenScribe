@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-
-class App extends Component {
-  render() {
-    return (
-      <div className="app">
-        <Textarea/>
-      </div>
-    );
-  }
-}
+import {State} from './State';
 
 function launchIntoFullscreen(element) {
   if(element.requestFullscreen) {
@@ -43,4 +34,17 @@ class Textarea extends Component {
   }
 }
 
-export default App;
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = new State();
+  }
+  render() {
+    return (
+      <div className="app">
+        <Textarea/>
+      </div>
+    );
+  }
+}
