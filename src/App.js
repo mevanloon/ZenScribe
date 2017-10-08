@@ -31,7 +31,7 @@ class Textarea extends Component {
         autoFocus
         tabIndex="0"
         contentEditable="true"
-        onDoubleClick={(e)=>{launchIntoFullscreen(document.getElementById('#root'))}}
+        onDoubleClick={(e)=>{launchIntoFullscreen(document.getElementById('root'))}}
         onKeyUp={this.onKeyUp}
         onKeyPress={this.props.handleTextareaKeyUp}
         ref={(input) => this.textarea = input}

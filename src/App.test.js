@@ -35,3 +35,20 @@ it('adds emoji to the state', () => {
 
   assert.ok(state.getUIState().textContent === "😎");
 });
+
+it('adds four spaces', () => {
+  const state = new State();
+  state.addText(" ");
+  state.addText(" ");
+  state.addText(" ");
+  state.addText(" ");
+
+  assert.ok(state.getUIState().textContent === "    ");
+});
+// it('moves the cursor next to the letter input', () => {
+  // assert.ok(window.getSelection)
+
+  // kijk waar de cursor staat
+  // doe keypress
+  // kijk waar de cursor nu staat
+// })
