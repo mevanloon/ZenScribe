@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {State} from './State';
 
 function launchIntoFullscreen(element) {
   if(element.requestFullscreen) {
@@ -19,31 +18,46 @@ class Textarea extends Component {
   doFocus() {
     this.textarea.focus();
   }
+
   componentDidMount() {
     this.doFocus();
   }
-  onKeyUp(e) {
-    if(e.keyCode === 13)
-      console.log(e.target.innerText);
-  }
+
   render() {
     return (
-      <div className="textarea"  autoFocus tabIndex="0" contentEditable="true" onDoubleClick={(e)=>{launchIntoFullscreen(document.getElementById('#root'))}} onKeyUp={this.onKeyUp} ref={(input) => this.textarea = input}>
+      <div
+        className="textarea"
+        autoFocus
+        tabIndex="0"
+        contentEditable="true"
+        onDoubleClick={(e)=>{launchIntoFullscreen(document.getElementById('#root'))}}
+        onKeyUp={this.onKeyUp}
+        onKeyPress={this.props.handleTextareaKeyUp}
+        ref={(input) => this.textarea = input} >
+        {this.props.textContent}
       </div>
     )
   }
 }
 
-
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = new State();
+    this.state = {textContent: ""};
+
+    this.handleTextareaKeyUp = this.handleTextareaKeyUp.bind(this);
   }
+
+  handleTextareaKeyUp(e) {
+    e.preventDefault();
+
+    this.setState( {textContent: e.key} );
+  }
+
   render() {
     return (
       <div className="app">
-        <Textarea/>
+        <Textarea handleTextareaKeyUp={this.handleTextareaKeyUp} textContent={this.state.textContent}/>
       </div>
     );
   }
