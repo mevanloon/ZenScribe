@@ -1,4 +1,4 @@
-import Assert from 'assert';
+import assert from 'assert';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -11,9 +11,19 @@ it('renders without crashing', () => {
 
 it('can create a state', () => {
   const state = new State();
-  Assert.ok(state != null && state != undefined);
+  assert.ok(state != null && state != undefined);
 });
 
-//it('puts adds text to the state', () => {
-//
-//});
+it('adds text to the state', () => {
+  const state = new State();
+  state.addText("a");
+
+  assert.ok(state.textContent === "a");
+});
+
+it('adds emoji to the state', () => {
+  const state = new State();
+  state.addText("😎");
+
+  assert.ok(state.textContent === "😎");
+});
