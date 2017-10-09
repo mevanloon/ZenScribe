@@ -15,11 +15,20 @@ body, html, #root {
 .textarea {
   font-size: 20px;
   font-family: 'Charter', 'Georgia', serif;
-
-  height: 80%;
-  width: 70%;
   min-width: 300px;
   max-width: 800px;
+  border-width: 1px;
+  border-style: dashed;
+  border-color: rgb(255, 255, 255);
+  padding: 13px;
+  height: 80%;
+  width: 70%;
   outline: none!important;
-  white-space: pre;
+  resize: none;
+
+  transition: all .5s ease-out;
+}
+
+.textarea:hover {
+  border-color: rgb(209, 209, 209);
 }

@@ -2,60 +2,38 @@ import assert from 'assert';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {State} from './State';
+import Textarea from './components/Textarea';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
 });
 
-it('can create a state', () => {
-  const state = new State();
-  assert.ok(state != null && state != undefined);
+it('can add a character to the state', () => {
+  const div = document.createElement('div');
+  let app = ReactDOM.render(<App />, div);
+
+  assert.ok(app.state.textContent === "");
+  app.updateTextContent("a")
+  assert.ok(app.state.textContent === "a");
 });
 
-it('adds character to the state', () => {
-  const state = new State();
-  state.addText("a");
+it('can add multiple chacters to the state', () => {
+  const div = document.createElement('div');
+  let app = ReactDOM.render(<App />, div);
 
-  assert.ok(state.getUIState().textContent === "a");
+  assert.ok(app.state.textContent === "");
+  app.updateTextContent("a")
+  assert.ok(app.state.textContent === "a");
+  app.updateTextContent("abcdef")
+  assert.ok(app.state.textContent === "abcdef");
 });
 
-it('adds multiple chacters to the state', () => {
-  const state = new State();
-  state.addText("a");
-  state.addText("bcdefg");
+it('can add emoji to the state', () => {
+  const div = document.createElement('div');
+  let app = ReactDOM.render(<App />, div);
 
-  assert.ok(state.getUIState().textContent === "abcdefg");
+  assert.ok(app.state.textContent === "");
+  app.updateTextContent("😎")
+  assert.ok(app.state.textContent === "😎");
 });
-
-it('adds emoji to the state', () => {
-  const state = new State();
-  state.addText("😎");
-
-  assert.ok(state.getUIState().textContent === "😎");
-});
-
-it('adds four spaces', () => {
-  const state = new State();
-  state.addText(" ");
-  state.addText(" ");
-  state.addText(" ");
-  state.addText(" ");
-
-  assert.ok(state.getUIState().textContent === "    ");
-});
-
-it('moves the cursor next to the letter input', () => {
-  const state = new State();
-  state.addText("123");
-
-  assert.equal(state.getUIState().cursorPosition, 3);
-})
-
-it('moves the cursor next to the letter input', () => {
-  const state = new State();
-  state.addText("12345");
-
-  assert.equal(state.getUIState().cursorPosition, 5);
-})
