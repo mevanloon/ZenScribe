@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Textarea from './components/Textarea';
+import toggleFullScreen from './utils';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
